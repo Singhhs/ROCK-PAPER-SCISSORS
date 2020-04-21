@@ -30,10 +30,9 @@ function computerPlay () {//Randomly return either ‘Rock’, ‘Paper’ or �
 
 
 function game(){ 
-    
+
     console.log(playRound(playerSelection, computerSelection))
-
-
+   
     function playRound(playerSelection, computerSelection) { //Compares the players choice with the computers and return the winner and choices of both
         console.log("You picked " + playerSelection + " and the computer choose " + computerSelection)
             if (playerSelection === computerSelection) {
@@ -41,10 +40,10 @@ function game(){
         }
         else if (playerSelection === "Rock") {
             if (computerSelection === "Scissors") {
-                return "rock wins";
+                return "rock wins"; 
             }
             else {
-                return "paper wins";
+                return "paper wins"; 
             }
         }
         else if (playerSelection === "Paper") {
