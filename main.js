@@ -1,73 +1,50 @@
-// buttons is a node list. It looks and acts much like an array.
-const buttons = document.querySelectorAll('button');
+function computerPlay () {
+    // randomly assigns the computer a choice of rock, paper or scissors
+       let computerChoice = Math.random();
+       if (computerChoice <= 0.34) {
+       return ('Rock')
+       } else if (computerChoice <= 0.67) {
+           return ('Paper')
+       } else {
+           return ('Scissors')
+           }
+   };
 
-// we use the .forEach method to iterate through each button
-buttons.forEach((button) => {
-  // and for each one we add a 'click' listener
-  button.addEventListener('click', (e) => {
-  });
-});
+function playRound(playerSelection, computerSelection) { 
+    // Determine who wins, or if there is a tie
+    if (playerSelection === computerSelection){
+        return 'Tie'
+    }
+    else if (playerSelection === 'Rock'){
+        if(computerSelection === 'Scissors'){
+            return 'Win'
+        } else{
+            return 'Lose'
+        }
+    }else if (playerSelection === 'Scissors'){
+        if( computerSelection === 'Paper'){
+            return 'Win'
+        } else{
+            return 'Lose'
+        }
+    }else if (playerSelection === 'Paper'){
+        if( computerSelection === 'Rock'){
+            return 'Win'
+        } else{
+            return 'Lose'
+        }
+    }
+  }
 
-
-let userInput = 
-
-const playerSelection = capitalize()
-const computerSelection = computerPlay()
- 
- function capitalize (){ //takes the userinput string and returns that string with only the first letter capitalized.
-        let makeAllLowerCase = userInput.toLowerCase() 
-        let userInputCapitalized =  makeAllLowerCase.charAt(0).toUpperCase() + makeAllLowerCase.slice(1); 
-        return (userInputCapitalized);
-}
-
-function computerPlay () {//Randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’.
-        let computerChoice = Math.random();
-        if (computerChoice <= 0.34) {
-        return ('Rock')
-        } else if (computerChoice <= 0.67) {
-            return ('Paper')
-        } else {
-            return ('Scissors')
-            }
-    };
-
+  
 
 function game(){ 
-
-    console.log(playRound(playerSelection, computerSelection))
-   
-    function playRound(playerSelection, computerSelection) { //Compares the players choice with the computers and return the winner and choices of both
-        console.log("You picked " + playerSelection + " and the computer choose " + computerSelection)
-            if (playerSelection === computerSelection) {
-            return "its a draw";
-        }
-        else if (playerSelection === "Rock") {
-            if (computerSelection === "Scissors") {
-                return "rock wins"; 
-            }
-            else {
-                return "paper wins"; 
-            }
-        }
-        else if (playerSelection === "Paper") {
-            if (computerSelection === "Rock") {
-                return "paper wins";
-            }
-            else {
-                return "scissors wins";
-            }
-        }
-        else if (playerSelection === "Scissors") {
-            if (computerSelection === "Rock") {
-                return "Rock wins";
-            }
-            else {
-                return "Scissors wins";
-            }
-        }
-        else {
-            return "invalid choice by user";
-        }
-        }
+// Player and computer choose
+let userInput = prompt("pick Rock, Paper or Scissors");
+const playerSelection = userInput
+const computerSelection = computerPlay()
+console.log("You picked " + playerSelection + " and the computer choose " + computerSelection)
+console.log(playRound(playerSelection, computerSelection))
 }
-    console.log(game())
+
+console.log(game())
