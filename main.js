@@ -36,13 +36,14 @@ function playRound(playerSelection, computerSelection) {
     }
   }
 
-  
 
 function game(){ 
 // Player and computer choose
 let userInput = prompt("pick Rock, Paper or Scissors");
 const playerSelection = userInput
 const computerSelection = computerPlay()
+
+// Se the play in the console for vertification
 console.log("You picked " + playerSelection + " and the computer choose " + computerSelection)
 console.log(playRound(playerSelection, computerSelection))
 }
