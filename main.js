@@ -1,69 +1,89 @@
-function computerPlay () {
-    // randomly assigns the computer a choice of rock, paper or scissors
-       let computerChoice = Math.random();
-       if (computerChoice <= 0.34) {
-       return ('Rock')
-       } else if (computerChoice <= 0.67) {
-           return ('Paper')
-       } else {
-           return ('Scissors')
-           }
-   };
+let playerSelection = null;
+let computerSelection = null;
+let playerScore = 0;
+let computerScore = 0;
+// Manipulating DOM for scorekeeping
+const score = document.querySelector('#score');
 
-function playRound(playerSelection, computerSelection) { 
-    // Determine who wins, or if there is a tie
-    if (playerSelection === computerSelection){
-        return 'Tie'
-    }
-    else if (playerSelection === 'Rock'){
-        if(computerSelection === 'Scissors'){
-            return 'Win'
-        } else{
-            return 'Lose'
-        }
-    }else if (playerSelection === 'Scissors'){
-        if( computerSelection === 'Paper'){
-            return 'Win'
-        } else{
-            return 'Lose'
-        }
-    }else if (playerSelection === 'Paper'){
-        if( computerSelection === 'Rock'){
-            return 'Win'
-        } else{
-            return 'Lose'
-        }
-    }
-  }
+const currentPlayerScore = document.createElement('h2');
+currentPlayerScore.textContent = `Player: ${playerScore}`;
+score.appendChild(currentPlayerScore);
 
+const currentComputerScore = document.createElement('h2');
+currentComputerScore.textContent = `Computer: ${computerScore}`;
+score.appendChild(currentComputerScore);
 
-function game(){ 
-// Player and computer choose
-let userInput = prompt("pick Rock, Paper or Scissors");
+// Manipulating DOM for round results
+const roundResults = document.querySelector('#roundResults');
+const currentRoundResults = document.createElement('h3');
+currentRoundResults.textContent = "Select a hand to start. First to 5 is the winner."
+roundResults.appendChild(currentRoundResults);
 
-//create event listener for refresh button
-//const userInput = document.querySelector('.Rock');
-//reset.addEventListener('click');
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+	button.addEventListener('click', (e) => {
+		currentRoundResults.textContent = `${playRound(button.id, computerPlay())}`;
+		roundResults.appendChild(currentRoundResults);
 
-const playerSelection = userInput
-const computerSelection = computerPlay()
+		currentPlayerScore.textContent = `Player: ${playerScore}`;
+		score.appendChild(currentPlayerScore);
+		currentComputerScore.textContent = `Computer: ${computerScore}`;
+		score.appendChild(currentComputerScore);
 
-// Se the play in the console for vertification
-console.log("You picked " + playerSelection + " and the computer choose " + computerSelection)
-console.log(playRound(playerSelection, computerSelection))
+		game();
+	});
+});
+
+function game() {
+	if (playerScore == 5) {
+		alert("You beat the computer!");
+		playerScore = 0;
+		computerScore = 0;
+	} else if (computerScore == 5) {
+		alert("You lost against a computer.");
+		playerScore = 0;
+		computerScore = 0;
+	}
 }
 
-console.log(game())
+function playRound(playerSelection, computerSelection) {
+	let roundResult = null;
 
+	if (playerSelection == computerSelection) {
+		roundResult = "Draw!";
+	}	else if (playerSelection == "ROCK" && computerSelection == "SCISSORS") {
+		playerScore ++;
+		roundResult = "You Win! " + playerSelection + " beats " + computerSelection + ".";
+	}	else if (playerSelection == "PAPER" && computerSelection == "ROCK") {
+		playerScore ++;
+		roundResult = "You Win! " + playerSelection + " beats " + computerSelection + ".";
+	}	else if (playerSelection == "SCISSORS" && computerSelection == "PAPER") {
+		playerScore ++;
+		roundResult = "You Win! " + playerSelection + " beats " + computerSelection + ".";
+	}	else {
+		computerScore ++;
+		roundResult = "You Lose! " + computerSelection + " beats " + playerSelection + "."; 
+	}
+	return roundResult;
+}
 
+function computerPlay() {
+	let computerHand = getRandomInt(3);
+	switch (computerHand) {
+		case 0:
+			computerHand = "ROCK";
+			break;
+		case 1:
+			computerHand = "PAPER";
+			break;
+		case 2:
+			computerHand = "SCISSORS";
+			break;
+	}
+	return computerHand;
+}
 
-// buttons is a node list. It looks and acts much like an array.
-const buttons = document.querySelectorAll('button');
-
-// we use the .forEach method to iterate through each button
-buttons.forEach((button) => {
-  // and for each one we add a 'click' listener
-  button.addEventListener('click', (e) => {
-    alert(button.id);
-  });
-});
+// Integer version of Math.random(): Copied from Mozilla MDN
+function getRandomInt(max) {
+	return Math.floor(Math.random() * Math.floor(max));
+}
