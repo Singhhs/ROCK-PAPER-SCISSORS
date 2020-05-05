@@ -40,6 +40,11 @@ function playRound(playerSelection, computerSelection) {
 function game(){ 
 // Player and computer choose
 let userInput = prompt("pick Rock, Paper or Scissors");
+
+//create event listener for refresh button
+//const userInput = document.querySelector('.Rock');
+//reset.addEventListener('click');
+
 const playerSelection = userInput
 const computerSelection = computerPlay()
 
@@ -49,3 +54,16 @@ console.log(playRound(playerSelection, computerSelection))
 }
 
 console.log(game())
+
+
+
+// buttons is a node list. It looks and acts much like an array.
+const buttons = document.querySelectorAll('button');
+
+// we use the .forEach method to iterate through each button
+buttons.forEach((button) => {
+  // and for each one we add a 'click' listener
+  button.addEventListener('click', (e) => {
+    alert(button.id);
+  });
+});
